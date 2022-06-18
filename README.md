@@ -47,7 +47,7 @@ Solution to the problem raised by the Ioet company
     <ul>
       <li>Execute the following command to run the program: <code>python EmployeesCoincidence.py data\data1.txt</code></li>
       <p></p>
-      <img src="/image/runcode.png">
+      <img src="/image/runcode1.png">
     <ul>
   </ol>
       <p><b>Note</b>: If you need to use other data you can modify the <code>data1.txt</code> file or change it to a <code>.txt</code> file of your choice</p>
