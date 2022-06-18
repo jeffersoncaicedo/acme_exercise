@@ -42,9 +42,12 @@ Solution to the problem raised by the Ioet company
   <ol>
     <li>You must have <code>Python 3.9.X</code> installed</li>
     <li>You need to clone or download the project from <a href=https://github.com/jeffersoncaicedo/acme_exercise>GitHub</a></li>
+    <img src="/image/cloneproject.png">
     <li>You can open the EmployeesCoincidence.py file from your preferred IDE or run it from the console</li>
     <ul>
       <li>Execute the following command to run the program: <code>python EmployeesCoincidence.py data\data1.txt</code></li>
+      <p></p>
+      <img src="/image/runcode.png">
     <ul>
   </ol>
       <p><b>Note</b>: If you need to use other data you can modify the <code>data1.txt</code> file or change it to a <code>.txt</code> file of your choice</p>
