@@ -6,7 +6,7 @@ def open_file(src):
     with open(src) as file:
         data = file.readlines()
         file.close()
-    organize_data(sets_of_data = data)
+    organize_data(sets_of_data=data)
 
 
 def organize_data(sets_of_data):
@@ -17,14 +17,23 @@ def organize_data(sets_of_data):
         for workday in days.split(","):
             day = workday[0:2]
             if '-' in workday:
+                entry = workday.split('-')[0][2:]
+                departure = workday.split('-')[1]
+                if datetime.strptime("00:00", '%H:%M') > datetime.strptime(entry, '%H:%M') > \
+                        datetime.strptime("24:00", '%H:%M'):
+                    raise(ValueError())
+                if datetime.strptime("00:00", '%H:%M') > datetime.strptime(departure, '%H:%M') > \
+                        datetime.strptime("24:00", '%H:%M'):
+                    raise(ValueError())
                 employeesdata[day + '_entry'] = workday.split('-')[0][2:]
                 employeesdata[day + '_departure'] = workday.split('-')[1]
         employeesdata['employee'] = nameemployes
         companydata.append(employeesdata)
-    claculate_coincidence(companydata = companydata)
-    
+    calculate_coincidence(companydata=companydata)
+    return companydata
 
-def claculate_coincidence(companydata):
+
+def calculate_coincidence(companydata):
     for i, employee1 in enumerate(companydata):
         for employee2 in companydata[i + 1:]:
             count = 0
@@ -38,16 +47,22 @@ def claculate_coincidence(companydata):
                             if "_departure" in key and "_departure" in key2:
                                 departureemployee1 = value
                                 departureemployee2 = value2
-                                if (datetime.strptime(entryemployee1, '%H:%M') < datetime.strptime(departureemployee2, '%H:%M') and
-                                    datetime.strptime(entryemployee2, '%H:%M') < datetime.strptime(departureemployee1, '%H:%M')):
+                                if datetime.strptime(entryemployee1, '%H:%M') < datetime.strptime(departureemployee2, '%H:%M') and
+                                   datetime.strptime(entryemployee2, '%H:%M') < datetime.strptime(departureemployee1, '%H:%M'):
                                     count += 1
-            print_results(employee1 = employee1, employee2 = employee2, count = count)
-            
+            print_results(employee1=employee1, employee2=employee2, count=count)
+            return count
+
 
 def print_results(employee1, employee2, count):
     if count > 0:
-        print(employee1['employee'] + "-" + employee2['employee'] + ":" + str(count))
-        
+        result = employee1['employee'] + "-" + employee2['employee'] + ":" + str(count)
+        print(result)
+    else:
+        result = "No employee coincides in the work schedule"
+        print(result)
+    return result
+
 
 if __name__ == "__main__":
-    open_file(sys.argv[1]) 
+    open_file(sys.argv[1])
