@@ -47,20 +47,19 @@ def calculate_coincidence(companydata):
                             if "_departure" in key and "_departure" in key2:
                                 departureemployee1 = value
                                 departureemployee2 = value2
-                                if datetime.strptime(entryemployee1, '%H:%M') < datetime.strptime(departureemployee2, '%H:%M') and
-                                   datetime.strptime(entryemployee2, '%H:%M') < datetime.strptime(departureemployee1, '%H:%M'):
+                                if datetime.strptime(entryemployee1, '%H:%M') < datetime.strptime(departureemployee2, '%H:%M') and \
+                                    datetime.strptime(entryemployee2, '%H:%M') < datetime.strptime(departureemployee1, '%H:%M'):
                                     count += 1
             print_results(employee1=employee1, employee2=employee2, count=count)
-            return count
+    return count
 
 
 def print_results(employee1, employee2, count):
     if count > 0:
         result = employee1['employee'] + "-" + employee2['employee'] + ":" + str(count)
-        print(result)
     else:
         result = "No employee coincides in the work schedule"
-        print(result)
+    print(result)
     return result
 
 
